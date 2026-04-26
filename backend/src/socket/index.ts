@@ -1,10 +1,18 @@
 import type { Server } from "socket.io";
 import { socketAuthMiddleware } from "../middlewares/socket.middleware";
 import { SocketEvents } from "../constants/socket";
+import { ApiError } from "../utils/ApiError";
 
+let ioInstance: Server;
 const initializeSocket = (io: Server) => {
-  io.use(socketAuthMiddleware);
+  if (!io) {
+    throw new ApiError(
+      500,
+      "Socket.io server instance is required to initialize socket.",
+    );
+  }
 
+  io.use(socketAuthMiddleware);
   io.on(SocketEvents.CONNECT, (socket) => {
     // register event listeners here
     socket.on(SocketEvents.JOIN_ROOM, (room) => {
@@ -36,6 +44,14 @@ const initializeSocket = (io: Server) => {
       console.log("user disconnected");
     });
   });
+  ioInstance = io;
+};
+
+export const getIO = () => {
+  if (!ioInstance) {
+    throw new ApiError(500, "Socket.io server instance is not initialized.");
+  }
+  return ioInstance;
 };
 
 export default initializeSocket;
