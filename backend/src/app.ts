@@ -26,6 +26,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // routes
+import authRoutes from "./module/auth/auth.route";
+app.use("/api/v1/auth", authRoutes);
 
 // error handling middleware
 app.use(

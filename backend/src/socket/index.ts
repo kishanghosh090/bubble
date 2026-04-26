@@ -15,14 +15,14 @@ const initializeSocket = (io: Server) => {
   io.use(socketAuthMiddleware);
   io.on(SocketEvents.CONNECT, (socket) => {
     // register event listeners here
-    socket.on(SocketEvents.JOIN_ROOM, (room) => {
-      socket.join(room);
-      console.log(`user joined room: ${room}`);
+    socket.on(SocketEvents.JOIN_ROOM, (conversationId) => {
+      socket.join(conversationId);
+      console.log(`user joined room: ${conversationId}`);
     });
 
-    socket.on(SocketEvents.LEAVE_ROOM, (room) => {
-      socket.leave(room);
-      console.log(`user left room: ${room}`);
+    socket.on(SocketEvents.LEAVE_ROOM, (conversationId) => {
+      socket.leave(conversationId);
+      console.log(`user left room: ${conversationId}`);
     });
 
     socket.on(SocketEvents.MESSAGE, (data) => {
@@ -30,13 +30,15 @@ const initializeSocket = (io: Server) => {
       // handle incoming message
     });
 
-    socket.on(SocketEvents.TYPING, (room) => {
-      socket.to(room).emit(SocketEvents.TYPING, { userId: socket.data.userId });
+    socket.on(SocketEvents.TYPING, (userID, conversationId) => {
+      socket
+        .to(conversationId)
+        .emit(SocketEvents.TYPING, { userId: socket.data.userId });
     });
 
-    socket.on(SocketEvents.STOP_TYPING, (room) => {
+    socket.on(SocketEvents.STOP_TYPING, (userID, conversationId) => {
       socket
-        .to(room)
+        .to(conversationId)
         .emit(SocketEvents.STOP_TYPING, { userId: socket.data.userId });
     });
 

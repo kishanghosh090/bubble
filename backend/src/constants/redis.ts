@@ -1,6 +1,4 @@
-export enum IO {
-  IO = "io",
-}
+
 export enum RedisKeysSocket {
   USER = "user",
   CONVERSATION = "conversation",
