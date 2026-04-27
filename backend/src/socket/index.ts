@@ -3,6 +3,7 @@ import { socketAuthMiddleware } from "../middlewares/socket.middleware";
 import { SocketEvents } from "../constants/socket";
 import { ApiError } from "../utils/ApiError";
 import { SocketService } from "./socket.service";
+import type { SocketPayload } from "../types/socketPayload";
 
 let ioInstance: Server;
 const initializeSocket = (io: Server) => {
@@ -24,7 +25,7 @@ const initializeSocket = (io: Server) => {
       SocketService.leaveRoom(socket, conversationId);
     });
 
-    socket.on(SocketEvents.MESSAGE, (data) => {
+    socket.on(SocketEvents.MESSAGE, (data: SocketPayload) => {
       SocketService.sendMessageToRoom(
         io,
         data.conversationId,
