@@ -1,4 +1,4 @@
-package xyz.kishanranaghosh.bubble.auth
+package xyz.kishanranaghosh.bubble.presentation.auth
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -7,7 +7,10 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.credentials.CredentialManager
 import androidx.credentials.CustomCredential
 import androidx.credentials.GetCredentialRequest
 import androidx.credentials.exceptions.NoCredentialException
@@ -21,13 +24,13 @@ import xyz.kishanranaghosh.bubble.R
 fun AuthScreen(vm: AuthViewModel = viewModel()) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope ()
-    val credentialManager = androidx.credentials.CredentialManager.create(context)
+    val credentialManager = CredentialManager.create(context)
     val webClientId = context.getString(R.string.default_web_client_id)
 
     Column (
-        modifier = androidx.compose.ui.Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally
     ){
         Button(onClick = {
             scope.launch {
