@@ -6,7 +6,7 @@ import xyz.kishanranaghosh.bubble.auth.AuthResponse
 import xyz.kishanranaghosh.bubble.auth.GoogleAuthRequest
 
 interface ApiService {
-    @POST("auth/google")
+    @POST("api/v1/auth/google")
     suspend fun googleAuth(@Body body: GoogleAuthRequest): AuthResponse
 }
 
