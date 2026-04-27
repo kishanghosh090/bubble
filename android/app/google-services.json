@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "372333789896",
+    "firebase_url": "https://drive-ed187-default-rtdb.firebaseio.com",
+    "project_id": "drive-ed187",
+    "storage_bucket": "drive-ed187.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:372333789896:android:a4aa96ebca55c2fa4e5bfd",
+        "android_client_info": {
+          "package_name": "xyz.kishanranaghosh.bubble"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "372333789896-ckj5n36padr6j91i35br8k95e5m96on8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCg8A1NHtVG--R0h2cHxeqkgXuRyPxCx_o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "372333789896-ckj5n36padr6j91i35br8k95e5m96on8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
