@@ -22,12 +22,15 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import xyz.kishanranaghosh.bubble.core.SessionManager
 import xyz.kishanranaghosh.bubble.navigation.Screen
+import xyz.kishanranaghosh.bubble.network.RetrofitClient
 import xyz.kishanranaghosh.bubble.presentation.auth.AuthScreen
+import xyz.kishanranaghosh.bubble.presentation.home.HomeScreen
 import xyz.kishanranaghosh.bubble.ui.theme.BubbleTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        RetrofitClient.init(applicationContext)
         enableEdgeToEdge()
         setContent {
             val context = LocalContext.current
@@ -50,19 +53,18 @@ class MainActivity : ComponentActivity() {
 
             BubbleTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-
                     NavHost(
                         navController = navController,
                         startDestination = Screen.Loading.route,
                         modifier = Modifier.padding(innerPadding)
                     ) {
                         composable(route = Screen.Auth.route) {
-                            AuthScreen(session = session)
+                            AuthScreen(session = session, navHostController = navController)
                         }
                         composable(
                             route = Screen.Home.route
                         ) {
-                            Text("Home Screen - User is authenticated")
+                            HomeScreen()
                         }
                         composable(
                             route = Screen.Loading.route

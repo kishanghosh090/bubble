@@ -3,6 +3,6 @@ import { integer, pgTable, varchar } from "drizzle-orm/pg-core";
 export const usersTable = pgTable("users", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   name: varchar({ length: 255 }).notNull(),
-  age: integer().notNull(),
+  phoneNumber: varchar({ length: 20 }),
   email: varchar({ length: 255 }).notNull().unique(),
 });

@@ -23,9 +23,9 @@ router.post("/send-otp", (req: Request, res: Response, next: NextFunction) => {
 router.post("/verify-otp", (req, res) => {
   res.send("OTP verified successfully");
 });
+
 router.post("/google", async (req: Request, res: Response) => {
   const { idToken } = req.body as { idToken?: string };
-  console.log(idToken);
 
   if (!idToken) {
     throw new ApiError(400, "idToken is required");
@@ -59,7 +59,7 @@ router.post("/google", async (req: Request, res: Response) => {
         .values({
           email,
           name,
-          age: 18,
+          phoneNumber: null,
         })
         .returning()
     )[0];
